@@ -12,7 +12,6 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .get('/db', (req, res) => res.render('pages/db'))
-  //.get('/home', (req, res) => res.render('pages/home'))
-  .get('/home', (req, res) => res.render('home'))
+
   .get('/w', (req, res) =>  console.log("this works"))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
