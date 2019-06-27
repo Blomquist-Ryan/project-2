@@ -37,8 +37,8 @@ express()
       if (error || result == null || result.length != 1) {
 			res.status(500).json({success: false, data: error});
 		} else {
-			const person = result[0];
-			res.status(200).json(person);
+			const rate = result[0];
+			res.status(200).json(rate);
 		}
     })
 
@@ -56,7 +56,7 @@ express()
 			console.log(err);
 			callback(err, null);
       }
-      console.log("Found result: " + JSON.stringify(result.rows));
+      console.log("Found result: " + JSON.rating);
       callback(null, result.rows);
     })
 
