@@ -1,13 +1,15 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
-const { Pool } = require('pg');
 
 
 var app = express();
+const { Pool } = require('pg');
+
+
+
 app.use(express.static('/public'));
 
- // This is the postgres database connection module.
 
 
 const connectionString = process.env.DATABASE_URL ||"postgres://pffksmlwolxddd:eed056cf82032a36e365e6d53871acf70500138b89e455f22c216222cfdf1eca@ec2-54-221-215-228.compute-1.amazonaws.com:5432/d9blinqsntetqe?ssl=true";
@@ -27,14 +29,17 @@ express()
 
 
   function getRating(req, res){
+
+
     const id = req.query.id;
+
     getRatingValue(id, function(error, result){
-      if (error){
-        console.log("the function failed");
-      } else {
-        const rate = result[0];
-        res.status(200).json(rating)
-      }
+      if (error || result == null || result.length != 1) {
+			response.status(500).json({success: false, data: error});
+		} else {
+			const person = result[0];
+			response.status(200).json(person);
+		}
     })
 
   }
