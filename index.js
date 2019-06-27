@@ -35,10 +35,10 @@ express()
 
     getRatingValue(id, function(error, result){
       if (error || result == null || result.length != 1) {
-			response.status(500).json({success: false, data: error});
+			res.status(500).json({success: false, data: error});
 		} else {
 			const person = result[0];
-			response.status(200).json(person);
+			res.status(200).json(person);
 		}
     })
 
