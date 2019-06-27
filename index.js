@@ -1,11 +1,13 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
+const { Pool } = require('pg');
+
 
 var app = express();
 app.use(express.static('/public'));
 
-const { Pool } = require("pg"); // This is the postgres database connection module.
+ // This is the postgres database connection module.
 
 
 const connectionString = process.env.DATABASE_URL ||"postgres://pffksmlwolxddd:eed056cf82032a36e365e6d53871acf70500138b89e455f22c216222cfdf1eca@ec2-54-221-215-228.compute-1.amazonaws.com:5432/d9blinqsntetqe?ssl=true";
