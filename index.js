@@ -56,7 +56,7 @@ express()
 			console.log(err);
 			callback(err, null);
       }
-      console.log("Found result: " + JSON.rating);
+      console.log("Found result: " + JSON.stringify(result.rows));
       callback(null, result.rows);
     })
 
