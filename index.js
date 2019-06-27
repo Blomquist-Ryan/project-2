@@ -31,7 +31,7 @@ express()
   function getRating(req, res){
 
 
-    const id = req.query.rating;
+    const id = req.query.;
 
     getRatingValue(id, function(error, result){
       if (error || result == null || result.length != 1) {
