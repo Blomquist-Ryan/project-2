@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const java = require('./public/pr2javascript')
 const PORT = process.env.PORT || 5000
 
 
@@ -24,16 +25,24 @@ express()
   .get('/', (req, res) => res.render('pages/index'))
   .get('/db', (req, res) => res.render('pages/db'))
   .get('/getrate', getRating)
+  .get('/test', function(req, res){
+    console.log("testing");
+    var thing = {
+      name: "harry",
+      age: 45,
+      weight: 4596
+    }
+    res.json(thing);
+  })
+  .post('/addMovie', addMovie)
 
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
   function getRating(req, res){
-
-
     const id = req.query.rating;
 
-    getRatingValue(id, function(error, result){
+    var rate = getRatingValue(id, function(error, result){
       if (error || result == null || result.length != 1) {
 			res.status(500).json({success: false, data: error});
 		} else {
@@ -41,6 +50,7 @@ express()
 			res.status(200).json(rate);
 		}
     })
+    res.json(rate);
 
   }
 
@@ -56,8 +66,30 @@ express()
 			console.log(err);
 			callback(err, null);
       }
-      console.log("Found result: " + JSON.stringify(result.rows));
-      callback(null, result.rows);
+
+      //var rat = JSON.parse(result.rows);
+      console.log("Found result: " +  result.rows );
+      return result.rows;
+      
+
+
     })
 
   }
+  
+
+  //adds a movie to the database
+  function addMovie(req, result){
+    var newMovie = req.query.newMovie;
+    var title = req.query.title;
+    var year = req.query.year;
+    var rating = req.query.rating;
+
+    console.log(JSON.stringify(newMovie));
+    console.log("the title is:" + title);
+    console.log("the year is:" + year);
+    console.log("the ratingis:" + rating);
+    callback(null, result.rows);
+
+  }
+
